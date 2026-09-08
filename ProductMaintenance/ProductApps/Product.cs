@@ -64,6 +64,7 @@ namespace ProductApps
         public void calTotalPayment()
         {
             TotalPayment = Price * Quantity;
+            TotalPayment = totalPayment + 25.00m + 5.00m;
         }
     }
 }

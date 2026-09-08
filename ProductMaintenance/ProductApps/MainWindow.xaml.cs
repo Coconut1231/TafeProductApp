@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ namespace ProductApps
     {
         Product cProduct;
 
+        private const decimal DELIVERY = 25.00m;
+      
         public MainWindow()
         {
             InitializeComponent();
@@ -31,15 +34,23 @@ namespace ProductApps
         {
             try
             {
-                cProduct = new Product(Convert.ToDecimal(priceTextBox.Text), Convert.ToInt16(quantityTextBox.Text));
+                cProduct = new Product(
+                    Convert.ToDecimal(priceTextBox.Text),
+                    Convert.ToInt16(quantityTextBox.Text)
+                );
+
+               
                 cProduct.calTotalPayment();
-                totalPaymentTextBlock.Text = Convert.ToString(cProduct.TotalPayment);
+                totalPaymentTextBlock.Text = cProduct.TotalPayment.ToString();
+                decimal totalCharge = cProduct.TotalPayment + DELIVERY;
+                totalChargeTextBox.Text = totalCharge.ToString();
             }
             catch (FormatException)
             {
                 MessageBox.Show("Enter data again", "Data Entry Error");
             }
         }
+
 
         private void clearButton_Click(object sender, RoutedEventArgs e)
         {

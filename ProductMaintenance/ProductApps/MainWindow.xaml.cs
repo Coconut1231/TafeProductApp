@@ -22,6 +22,10 @@ namespace ProductApps
     {
         Product cProduct;
 
+        private const decimal DELIVERY = 25.00m;
+        private const decimal WRAPPING = 5.00m;
+
+        private const decimal GST = 0.10m;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +38,10 @@ namespace ProductApps
                 cProduct = new Product(Convert.ToDecimal(priceTextBox.Text), Convert.ToInt16(quantityTextBox.Text));
                 cProduct.calTotalPayment();
                 totalPaymentTextBlock.Text = Convert.ToString(cProduct.TotalPayment);
+                totalChargeTextBox.Text = Convert.ToString(cProduct.TotalPayment + 25.00m);
+                totalChargeWrapTextBox.Text = Convert.ToString(cProduct.TotalPayment + 25.00m + 5.00m);
+
+
             }
             catch (FormatException)
             {
@@ -41,12 +49,15 @@ namespace ProductApps
             }
         }
 
+
         private void clearButton_Click(object sender, RoutedEventArgs e)
         {
             productTextBox.Text = "";
             priceTextBox.Text = "";
             quantityTextBox.Text = "";
             totalPaymentTextBlock.Text = "";
+            totalChargeWrapTextBox.Text = "";
+            totalChargeTextBox.Text = "";
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
